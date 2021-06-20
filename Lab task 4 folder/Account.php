@@ -1,0 +1,33 @@
+<html>
+<body>
+
+<form>
+<h3>Account</h3>
+
+<table>
+	<tr>
+		<td><a href="Dashboard.php">Dashboard</a></td>
+	</tr>
+
+	<tr>
+		<td><a href="ViewProfile.php">View Profile</a></td>
+	</tr>
+
+	<tr>
+		<td><a href="EditProfile.php">Edit Profile</a></td>
+	</tr>
+
+	<tr>
+		<td><a href="ChangeProfilePicture.php">Change Profile Picture</a></td>
+	</tr>
+
+	<tr>
+		<td><a href="ChangePassword.php">Change Password</a></td>
+	</tr>
+	<tr>
+		<td><a href="Login.php">Logout</a></td>
+	</tr>
+</table>
+</form>
+</body>
+</html> 

@@ -49,7 +49,7 @@ if (isset($_POST['submit']))
 		}
 		else
 		{
-			if (strlen($npassword >= 8)) 
+			if (strlen($npassword) >= 8) 
 			{
 			}
 			else
