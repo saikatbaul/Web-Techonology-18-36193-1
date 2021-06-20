@@ -1,6 +1,6 @@
 <!DOCTYPE html>  
- <html>  
- <head>
+<html>  
+<head>
 <style>
 .error {color: red;}
 .success {color: green;}
@@ -85,7 +85,7 @@ if (isset($_POST['submit']))
 
  <?php include 'Head_1.php';?> 
 
-<from>
+<form method="post">
 <table>
      <tr>
           <td><?php include 'Account.php';?></td>
@@ -107,7 +107,7 @@ if (isset($_POST['submit']))
                          echo $row["name"]; 
                          } 
                     } 
-                    ?>"></td>  
+                    ?>"><span class="error"><?php echo $nameErr;?></span></td>  
                </tr>  
 
                <tr>
@@ -124,14 +124,13 @@ if (isset($_POST['submit']))
                          echo $row["e-mail"]; 
                          } 
                     } 
-                    ?>"></td>
+                    ?>"><span class="error"><?php echo $emailErr;?></span></td>
                </tr> 
 
                <tr>
                     <td align="left">Gender </td>
                     <td>: </td>
-                    <td>
-                         <?php
+                    <td> <?php
                          $g = "";   
                          $data = file_get_contents("data.json");  
                          $data = json_decode($data, true);  
@@ -140,14 +139,14 @@ if (isset($_POST['submit']))
                          {  
                               if($row["username"] == $_SESSION['uname'])
                               {
-                                   $g = $row["gender"]; 
+                                   $g = $row["gender"];
                               } 
                          } 
                          ?>
-                         <input type="radio" name="gender" <?php if (isset($gender) && $g=="female") echo "checked";?> value="Female">Female
-                         <input type="radio" name="gender" <?php if (isset($gender) && $g=="male") echo "checked";?> value="Male">Male
-                         <input type="radio" name="gender" <?php if (isset($gender) && $g=="other") echo "checked";?> value="Other">Other
-                    </td>   
+                         <input type="radio" name="gender" <?php if ($g=="Female") echo "checked";?> value="Female">Female
+                         <input type="radio" name="gender" <?php if ($g=="Male") echo "checked";?> value="Male">Male
+                         <input type="radio" name="gender" <?php if ($g=="Other") echo "checked";?> value="Other">Other
+                         <span class="error"><?php echo $genderErr;?></span></td>   
                </tr> 
 
                <tr>  
@@ -164,7 +163,7 @@ if (isset($_POST['submit']))
                          echo $row["dob"]; 
                          } 
                     } 
-                    ?>"></td>
+                    ?>"><span class="error"><?php echo $dobErr;?></span></td>
                </tr>
 
                <tr>
@@ -180,7 +179,7 @@ if (isset($_POST['submit']))
           </td>
      </tr>
 </table>
-</from>
+</form>
  
 <?php include 'Foot.php';?> 
 

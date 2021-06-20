@@ -12,8 +12,8 @@
 
 <?php
 
-$cpasswordErr = $npasswordErr = $rnpasswordErr = "";
-$cpassword = $npassword = $rnpassword = $success = "";
+$cpasswordErr = $npasswordErr = $rnpasswordErr = $error = "";
+$uname = $password = $cpassword = $npassword = $rnpassword = $success = "";
 
 
 if (isset($_POST['submit']))
@@ -25,67 +25,63 @@ if (isset($_POST['submit']))
 	else 
 	{
 		$cpassword = $_POST["cpassword"];
+		$password = $_SESSION['password'];
 
-		$data = file_get_contents("data.json");  
-		$data = json_decode($data, true);
-		      
-		foreach($data as $row)  
-		{
-		    if($row["username"] == $_SESSION['uname'] && $row["password"] == $cpassword)
-		    { 
-		    } 
-			else
+	    if($password == $cpassword)
+	    {
+	    	if (empty($_POST["npassword"])) 
 			{
-				$cpasswordErr = "Password didn't match.";
-				$cpassword="";
+				$npasswordErr = "New password is required";
+			} 
+			else 
+			{
+				$npassword = $_POST["npassword"];
+
+				if ($npassword == $cpassword) 
+				{
+					$npasswordErr ="Current password and New password can not be same";
+					$npassword = "";
+				}
+				else
+				{
+					if (strlen($npassword) >= 8) 
+					{
+						if (empty($_POST["rnpassword"])) 
+						{
+							$rnpasswordErr = "Retype new password is required";
+						} 
+						else 
+						{
+							$rnpassword = $_POST["rnpassword"];
+							if ($rnpassword == $npassword) 
+							{
+								$success = "Password changed";
+							}
+							else
+							{
+								$rnpasswordErr = "New password and retype new passward did not match";
+								$npassword = "";
+								$rnpassword= "";
+							}
+						}	
+					}
+					else
+					{
+						$npasswordErr = "Password  must contain atleast 8 charecters";
+						$npassword = "";
+					}
+				}	
 			}
-		}
-	}
-
-	if (empty($_POST["npassword"])) 
-	{
-		$npasswordErr = "New password is required";
-	} 
-	else 
-	{
-		$npassword = $_POST["npassword"];
-
-		if ($npassword == $cpassword) 
-		{
-			$npasswordErr ="Current password and New password can not be same";
-			$npassword = "";
-		}
+	    } 
 		else
 		{
-			if (strlen($npassword) >= 8) 
-			{
-			}
-			else
-			{
-				$npasswordErr = "Password  must contain atleast 8 charecters";
-				$npassword = "";
-			}
-		}	
+			$cpasswordErr = "Password didn't match";
+			$cpassword="";
+		}
 	}
 
-	if (empty($_POST["rnpassword"])) 
-	{
-		$rnpasswordErr = "Retype new password is required";
-	} 
-	else 
-	{
-		$rnpassword = $_POST["rnpassword"];
-		if ($rnpassword == $npassword) 
-		{
-			$success = "Password changed";
-		}
-		else
-		{
-			$rnpasswordErr = "New password and retype new passward did not match";
-			$npassword = "";
-			$rnpassword= "";
-		}
-	}
+
+	
 }
 ?>
 
@@ -116,7 +112,7 @@ if (isset($_POST['submit']))
 			    	</tr>
 
 			    	<tr>
-			    		<td colspan="3"><span class="success"><?php echo $success;?></span></td>
+			    		<td><span class="success"><?php echo $success;?></span></td>
 			    	</tr>
 
 					<tr>

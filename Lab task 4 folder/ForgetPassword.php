@@ -10,13 +10,13 @@
 
 <?php
 
-$email = $emailErr = $success = "";
+$email = $error = $success = "";
 
 if (isset($_POST['submit']))
 {
 	if (empty($_POST["email"])) 
 	{
-		$emailErr = "Email is required";
+		$error = "Email is required";
 	} 
 	else 
 	{
@@ -28,22 +28,22 @@ if (isset($_POST['submit']))
 		{  
 			if ($row["e-mail"] ==  $email) 
 			{
-				$success = "Check your E-mail";
-				
-				if(empty($success))
-				{
-					$emailErr = "Invalid";
-				}
-				else
-				{
-					$emailErr = "";
-				}
+				$success = $row["name"]." your password is :- ".$row["password"];
 			}
 			else
 			{
-				$emailErr = "Invalid";
+				$error = "Invalid";
 			}
      	}
+     	
+     	if(empty($success))
+		{
+			$error = "Invalid";
+		}
+		else
+		{
+			$error = "";
+		}
 	}
 }
 ?>
@@ -57,11 +57,11 @@ if (isset($_POST['submit']))
     	<tr>
     		<td>Enter Email </td>
     		<td>:</td>
-    		<td><input type="text" name="email" value="<?php echo $email;?>"><span class="error"><?php echo $emailErr;?></span></td>
+    		<td><input type="text" name="email" value="<?php echo $email;?>"><span class="error"><?php echo $error;?></span></td>
     	</tr>
 
     	<tr>
-    		<td colspan="3"><span class="success"><?php echo $success;?></span></td>
+    		<td colspan="5"><span class="success"><?php echo $success;?></span></td>
     	</tr>
 
 		<tr>

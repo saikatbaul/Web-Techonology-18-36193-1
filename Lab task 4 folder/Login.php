@@ -35,6 +35,7 @@ if (isset($_POST['submit']))
 
 				$success = "Login successful";
 				$_SESSION['uname'] = $uname;
+				$_SESSION['password'] = $password;
 				header("location:Dashboard.php");
 				if(empty($success))
 				{

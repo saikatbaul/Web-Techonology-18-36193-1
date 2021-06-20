@@ -11,7 +11,7 @@
       <form action="CPP.php" method="post" enctype="multipart/form-data">
       <fieldset>
         <legend>PROFILE PICTURE</legend>
-        <img src="https://www.pngitem.com/pimgs/m/192-1924040_contact-profil-logo-png-transparent-png.png" alt="PP" width="130" height="130"><br>
+        <img src="./Picture/pp.jpg" alt="PP" style="width:130px;height:130px;"><br>
         <input type="file" name="fileToUpload" id="fileToUpload"><br><br>
         <input type="submit" value="Submit" name="submit">
       </fieldset>

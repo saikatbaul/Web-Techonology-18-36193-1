@@ -3,10 +3,9 @@
 
 <form method="post">
 
-
 <table>
 	<tr>
-		<td><img src="https://image.shutterstock.com/image-vector/letter-s-cross-medical-logo-260nw-742696411.jpg" alt="Logo" width="80" height="80"></td>
+		<td><a href="PublicHome.php"><img src="./Picture/logo.jpg" alt="Logo" style="width:80px;height:80px;"></a></td>
 		<td align="right" style="width: 100%;"><a href="PublicHome.php">Home</a> | <a href="Login.php">Login</a> | <a href="Registration.php">Registration</a></td>
 	</tr>
 </table>
