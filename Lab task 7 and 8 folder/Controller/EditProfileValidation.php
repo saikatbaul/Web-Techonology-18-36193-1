@@ -88,7 +88,7 @@ if (isset($_POST['submit']))
 
      if (empty($_POST["phoneNumber"])) 
      {
-          $pNumberErr = "Phone number is required";
+          $phoneNumberErr = "Phone number is required";
      } 
      else 
      {
