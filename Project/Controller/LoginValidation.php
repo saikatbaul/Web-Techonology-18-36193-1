@@ -1,54 +1,53 @@
 <?php
 
-$error = $success = $uname = $password = "";
+$error = $count = "";
 
 if (isset($_POST['submit']))
 {
-	if (empty($_POST["uname"]) && empty($_POST["password"])) 
+	if (empty($_POST["uname"]) || empty($_POST["password"])) 
 	{
 		$error = "Both username and password required";
 	} 
 	else 
 	{
-		$uname = $_POST["uname"];
-		$password = $_POST["password"]; 
-		$data = file_get_contents("../JsonData/data.json");  
-		$data = json_decode($data, true);  
-                
-		foreach($data as $row)  
-		{  
-			if ($row["username"] == $uname && $row["password"] == $password) 
+		$uname = $_POST['uname'];
+		$password = $_POST['password'];
+		require_once '../Model/connectionDb.php';
+		$conn = db_conn();
+	    $selectQuery = "SELECT * FROM `storeofficer` WHERE uname = :uname AND password = :password";
+	    try
+	    {
+	        $stmt = $conn->prepare($selectQuery);
+	        $stmt->execute([
+	            ':uname' => $uname,
+	            ':password' => $password
+	        ]);
+	    }
+	    catch(PDOException $e)
+	    {
+	        echo $e->getMessage();
+	    }
+	    $count = $stmt->rowCount();
+	    if($count == 1)
+		{
+			$_SESSION['uname'] = $uname;
+			$_SESSION['password'] = $password;
+			if(empty($_POST["remindMe"]))
 			{
-
-				$success = "Login successful";
-				$_SESSION['uname'] = $uname;
-				$_SESSION['password'] = $password;
-				header("location:Dashboard.php");
-				if(empty($success))
-				{
-					$error = "Invalid";
-				}
-				else
-				{
-					$error = "";
-				}
+				setcookie("uname","");
+				setcookie("password","");
 			}
 			else
 			{
-				$error = "Invalid";
-			}
-     	}
+				setcookie ("uname",$_POST["uname"],time() + 86400*30);
+				setcookie ("password",$_POST["password"],time() + 86400*30);
+			} 
+			header("location:Dashboard.php");
+		}
+		else
+		{
+			$error = "Invalid";
+		}
 	}
-
-	if(empty($_POST["remindMe"]))
-	{
-	setcookie("username","");
-	setcookie("password","");
-	}
-	else
-	{
-		setcookie ("uname",$_POST["uname"],time() + 86400*30);
-		setcookie ("password",$_POST["password"],time() + 86400*30);
-	} 
 }
 ?>

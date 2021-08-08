@@ -2,11 +2,9 @@
 <body>
 
 <form method="post">
-
-<fieldset>
 <table>
 	<tr>
-		<td><a href="Dashboard.php"><img src="../Picture/logo.jpg" alt="Logo" style="width:80px;height:80px;"></a></td>
+		<td><a href="Dashboard.php"><img src="../Picture/sp.jpg" alt="Logo" style="width:280px;height:100px;"></a></td>
 		<td align="right" style="width: 100%;"> 
 	    <?php 
 	    	
@@ -18,10 +16,9 @@
 		{
 			header("location:Login.php");
 	    }
-		?> | <a href="../Controller/Logout.php">Logout</a></td>
+		?> <a href="../Controller/Logout.php">Logout</a></td>
 	</tr>
 </table>
-</fieldset>
 </form>
 </body>
 </html>

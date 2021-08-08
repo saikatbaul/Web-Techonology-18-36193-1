@@ -1,41 +1,18 @@
 <html>
 <body>
-
-<form>
-<fieldset>
-	
-<h3>Account</h3>
-<table>
-	<tr>
-		<td><a href="Dashboard.php">Dashboard</a></td>
-	</tr>
-
-	<tr>
-		<td><a href="ViewProfile.php">View Profile</a></td>
-	</tr>
-
-	<tr>
-		<td><a href="EditProfile.php">Edit Profile</a></td>
-	</tr>
-
-	<tr>
-		<td><a href="ChangeProfilePicture.php">Change Profile Picture</a></td>
-	</tr>
-
-	<tr>
-		<td><a href="ChangePassword.php">Change Password</a></td>
-	</tr>
-
-	<tr>
-		<td><a href="Delete.php">Remove User</a></td>
-	</tr>
-
-	<tr>
-		<td><a href="../Controller/Logout.php">Logout</a></td>
-	</tr>
-</table>
-
-</fieldset>
-</form>
+	<form>
+		<ul>
+			<li><a href="Dashboard.php">Dashboard</a></li>
+			<li><a href="ViewProfile.php">View Profile</a></li>
+			<li><a href="EditProfile.php">Edit Profile</a></li>
+			<li><a href="ChangeProfilePicture.php">Change Profile Picture</a></li>
+			<li><a href="ChangePassword.php">Change Password</a></li>
+			<li><a href="addMedicine.php">Add Medicine</a></li>
+			<li><a href="searchMedicine.php">Search Medicine</a></li>
+			<li><a href="displayMedicine.php">Show All Medicine</a></li>
+			<li><a href="handleUsers.php">Handle Users</a></li>
+			<li><a href="../Controller/Logout.php">Logout</a></li>
+		</ul>
+	</form>
 </body>
 </html> 

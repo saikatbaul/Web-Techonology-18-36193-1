@@ -1,6 +1,6 @@
 <?php
 
-$error = $success = $count = "";
+$error = $count = "";
 
 if (isset($_POST['submit']))
 {

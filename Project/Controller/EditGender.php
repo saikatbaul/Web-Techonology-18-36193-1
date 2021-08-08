@@ -1,14 +1,16 @@
 <?php  
- 
-$g = ""; 
-$data = file_get_contents("../JsonData/data.json");  
-$data = json_decode($data, true);  
-      
-foreach($data as $row)  
-{  
-     if($row["username"] == $_SESSION['uname'])
+     require_once '../Model/connectionDb.php';
+     $conn = db_conn();
+     $selectQuery = "SELECT * FROM `storeofficer` WHERE uname = :uname";
+     try
      {
-          $g = $row["gender"]; 
-     } 
-} 
+         $stmt = $conn->prepare($selectQuery);
+         $stmt->execute([':uname' => $_SESSION['uname']]);
+     }
+     catch(PDOException $e)
+     {
+         echo $e->getMessage();
+     }
+     $row = $stmt->fetch(PDO::FETCH_ASSOC);
+     $g = $row["gender"];
 ?>

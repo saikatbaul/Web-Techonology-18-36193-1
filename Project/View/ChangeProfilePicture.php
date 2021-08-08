@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../CSS/storeOfficer.css">
+</head>
 <body>
-<fieldset><br>
-<?php include 'Head.php';?><br>
-<fieldset>
-<table>
-  <tr>
-    <td><?php require 'Account.php';?></td>
-    <td>
+  <div class="header">
+    <?php include 'Head.php';?>
+  </div>
+  <div class="row">
+    <div class="col-3 menu">
+      <?php include 'Account.php';?>
+    </div>
+
+    <div class="col-6">
       <form action="CPP.php" method="post" enctype="multipart/form-data">
       <fieldset>
         <legend>PROFILE PICTURE</legend>
@@ -16,12 +22,10 @@
         <input type="submit" value="Submit" name="submit">
       </fieldset>
       </form>
-    </td>
-  </tr>
-</table>
-</fieldset><br>
-
-<?php include 'Foot.php';?><br>
-</fieldset>
+    </div>
+  </div>
+  <div class="footer">
+    <?php include 'Foot.php';?>
+  </div>
 </body>
 </html>

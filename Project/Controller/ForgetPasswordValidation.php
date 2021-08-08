@@ -11,28 +11,31 @@ if (isset($_POST['submit']))
 	else 
 	{
 		$email = $_POST["email"]; 
-		$data = file_get_contents("../JsonData/data.json");  
-		$data = json_decode($data, true);  
-                
-		foreach($data as $row)  
-		{  
-			if ($row["e-mail"] ==  $email) 
-			{
-				$success = $row["name"]." your password is :- ".$row["password"];
-			}
-			else
-			{
-				$error = "Invalid";
-			}
-     	}
-     	
-     	if(empty($success))
+		require_once '../Model/connectionDb.php';
+		$conn = db_conn();
+		$selectQuery = "SELECT * FROM `storeofficer` WHERE email = :email";
+		try
 		{
-			$error = "Invalid";
+		    $stmt = $conn->prepare($selectQuery);
+		    $stmt->execute([':email' => $email]);
+		}
+		catch(PDOException $e)
+		{
+		    echo $e->getMessage();
+		}
+		$row = $stmt->fetch(PDO::FETCH_ASSOC);
+		$name = $row["name"];
+		$password = $row["password"];
+
+		$count = $stmt->rowCount();
+
+		if($count == 1)
+		{
+			$success = $name." your password is :- ".$password;
 		}
 		else
 		{
-			$error = "";
+			$error = "Invalid";
 		}
 	}
 }

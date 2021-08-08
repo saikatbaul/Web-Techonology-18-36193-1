@@ -1,7 +1,7 @@
 <?php
 
-$nameErr = $emailErr = $unameErr = $dobErr = $genderErr = $pNumberErr = $passwordErr = $cpasswordErr = "";
-$name = $email = $uname = $dob = $gender = $pNumber = $password = $cpassword =  $error ="";
+$nameErr = $emailErr = $unameErr = $dobErr = $genderErr = $phoneNumberErr = $passwordErr = $cpasswordErr = "";
+$name = $email = $uname = $dob = $gender = $phoneNumber = $password = $pass = $cpassword = $error ="";
 
 if (isset($_POST['submit'])) 
 {
@@ -42,6 +42,27 @@ if (isset($_POST['submit']))
 			$emailErr = "Invalid email format";
 			$email ="";
 		}
+		else
+		{
+			require_once '../Model/connectionDb.php';
+			$conn = db_conn();
+			$selectQuery = "SELECT * FROM `storeofficer` WHERE email = :email";
+			try
+		    {
+		        $stmt = $conn->prepare($selectQuery);
+		        $stmt->execute([':email' => $email]);
+		    }
+		    catch(PDOException $e)
+		    {
+		        echo $e->getMessage();
+		    }
+		    $count = $stmt->rowCount();
+		    if($count == 1)
+			{
+				$emailErr = "Email already exists";
+				$email = "";
+			}
+		}
 	}
 
 	if (empty($_POST["uname"])) 
@@ -55,6 +76,24 @@ if (isset($_POST['submit']))
 		{
 			if(strlen($uname) >= 2)
 			{
+				require_once '../Model/connectionDb.php';
+				$conn = db_conn();
+				$selectQuery = "SELECT * FROM `storeofficer` WHERE uname = :uname";
+				try
+			    {
+			        $stmt = $conn->prepare($selectQuery);
+			        $stmt->execute([':uname' => $uname]);
+			    }
+			    catch(PDOException $e)
+			    {
+			        echo $e->getMessage();
+			    }
+			    $count = $stmt->rowCount();
+			    if($count == 1)
+				{
+					$unameErr = "Username already exists";
+					$uname = "";
+				}
 			}
 			else
 			{
@@ -75,14 +114,15 @@ if (isset($_POST['submit']))
 	} 
 	else 
 	{
-		$password = $_POST["password"];
-		if (strlen($password) >= 8) 
+		$pass = $_POST["password"];
+		if (strlen($pass) >= 8) 
 		{
+			$password = $_POST['password'];
 		}
 		else
 		{
 			$passwordErr = "Password  must contain atleast 8 charecters";
-			$password = "";
+			$password = $pass = "";
 		}
 	}
 
@@ -93,13 +133,13 @@ if (isset($_POST['submit']))
 	else 
 	{
 		$cpassword = $_POST["cpassword"];
-		if ($cpassword == $password) 
+		if ($cpassword == $pass) 
 		{
 		}
 		else
 		{
 			$cpasswordErr = "Password and confirm passward did not match";
-			$password = "";
+			$password = $pass = "";
 			$cpassword = "";
 		}
 	}
@@ -113,27 +153,28 @@ if (isset($_POST['submit']))
 		$gender = $_POST["gender"];
 	}
 
-	if (empty($_POST["pNumber"])) 
+	if (empty($_POST["phoneNumber"])) 
 	{
-		$pNumberErr = "Phone number is required";
+		$phoneNumberErr = "Phone number is required";
 	} 
 	else 
 	{
-		$pNumber = $_POST["pNumber"];
-		if (preg_match("/^[0-9]*$/",$pNumber)) 
+		$phoneNumber = $_POST["phoneNumber"];
+		if (preg_match("/^[0-9]*$/",$phoneNumber)) 
 		{
-			if (strlen($pNumber) == 11) 
+			if (strlen($phoneNumber) == 11) 
 			{
 			}
 			else
 			{
-				$pNumberErr = "Phone number is exact 11 digit";
+				$phoneNumberErr = "Phone number is exact 11 digit";
+				$phoneNumber = "";
 			}
 		}
 		else
 		{
-			$pNumberErr = "Only 0-9 is allowed";
-			$pNumber = "";
+			$phoneNumberErr = "Only 0-9 is allowed";
+			$phoneNumber = "";
 		}
 	}
 
@@ -146,53 +187,27 @@ if (isset($_POST['submit']))
 		$dob = $_POST["dob"];
 	}
 
-	if(file_exists('../JsonData/data.json'))  
-	{  
-    	if(empty($name))  
-  		{  
-      		$error = "Failed";  
- 		}
-  		else if(empty($email))  
-  		{  
-       		$error = "Failed";   
-  		}  
-  		else if(empty($uname)) 
-  		{  
-      	 	$error = "Failed";  
-  		}  
-  		else if(empty($password))  
-  		{  
-       		$error = "Failed"; 
-  		}
-  		else if(empty($cpassword))  
-  		{  
-       		$error = "Failed"; 
-  		} 
-  		else if(empty($gender))  
-  		{  
-       		$error = "Failed"; 
-  		} 
-
-        else
-        {
- 		 	$current_data = file_get_contents('../JsonData/data.json');  
-        	$array_data = json_decode($current_data, true);  
-        	$extra = array('name' => $name, 'e-mail' => $email, 'username' => $uname, 'password' => $password, 'gender' => $gender, 'pNumber' => $pNumber, 'dob' => $dob);
-        	$array_data[] = $extra;  
-        	$final_data = json_encode($array_data);
-        	if(file_put_contents('../JsonData/data.json', $final_data))  
-        	{
-            	header("location: ../View/Login.php");
-            }    
-       		else  
-       		{  
-            	$error = "Failed";  
-       		}	
-        }
-    }
+	if(empty($name) || empty($email) || empty($uname) || empty($password) || empty($cpassword) || empty($gender) || empty($phoneNumber) || empty($dob))
+	{
+		$error = "Input Error!!"; 
+	}
     else  
 	{  
-		$error = "JSON File doesn't exits";  
+		require_once '../Model/modelStoreOfficer.php';
+
+		$data['name'] = $name;
+		$data['email'] = $email;
+		$data['uname'] = $uname;
+		$data['password'] = $password;
+		$data['gender'] = $gender;
+		$data['phoneNumber'] = $phoneNumber;
+		$data['dob'] = $dob;
+
+
+		if (addStoreOfficer($data)) 
+		{
+			header('Location: ../View/Login.php');
+		} 
 	}
 }
 ?>
