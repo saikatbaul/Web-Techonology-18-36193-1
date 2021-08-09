@@ -1,3 +1,4 @@
+<!DOCTYPE HTML>
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,7 +27,6 @@
 				}?>
 			</div>
 		</div>
-
 	</form>
 	<div class="footer">
 		<?php include 'Foot.php';?>

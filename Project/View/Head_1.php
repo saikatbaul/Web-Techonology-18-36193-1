@@ -1,7 +1,6 @@
 <html>
 <body>
 
-<form method="post">
 <table>
 	<tr>
 		<td><a href="Dashboard.php"><img src="../Picture/sp.jpg" alt="Logo" style="width:280px;height:100px;"></a></td>
@@ -19,6 +18,5 @@
 		?> <a href="../Controller/Logout.php">Logout</a></td>
 	</tr>
 </table>
-</form>
 </body>
 </html>

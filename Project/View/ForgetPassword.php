@@ -2,6 +2,7 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/storeOfficerLogin.css">
     <link rel="stylesheet" href="../CSS/storeOfficer.css">
 	<script>
 		function checkEmail() 
@@ -29,26 +30,22 @@
 	</div><br>
 
 	<form method="post">	
-	<fieldset>
-	    <legend>FORGOT PASSWORD</legend>
-	    <table>
-	    	<tr>
-	    		<td>Enter Email </td>
-	    		<td>:</td>
-	    		<td><input type="text" name="email" id="email" onkeyup="checkEmail()" onblur="checkEmail()" value="<?php echo $email;?>">
-					<span id="emailErr"></span><span class="error"><?php echo $error;?></span></td>
-	    	</tr>
+		<h1>Please enter your email</h1>
+		<div class="inset">
+			<p>
+				<label for="email">EMAIL</label>
+			    <input type="text" name="email" id="email" onkeyup="checkEmail()" onblur="checkEmail()" value="<?php echo $email;?>">
+			</p>
+							
+			<span id="emailErr"></span>
+			<span class="error"><?php echo $error;?></span>
+			<span class="success"><?php echo $success;?></span>
+		</div>
 
-	    	<tr>
-	    		<td colspan="5"><span class="success"><?php echo $success;?></span></td>
-	    	</tr>
-
-			<tr>
-				<td><input type="submit" name="submit" value="Submit">
-			</tr>
-	    </table>
-	</fieldset>
-	</form><br>
+		<p class="p-container">		
+			<input type="submit" name="submit" value="Submit">
+		</p>
+	</form>
 
 	<div class="footer">
 		<?php include 'Foot.php';?>

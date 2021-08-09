@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/storeOfficerRegistration.css">
     <link rel="stylesheet" href="../CSS/storeOfficer.css">
     <script>  
 		function checkCurrentPassword() 
@@ -68,39 +69,31 @@
 
 		<div class="col-6">
 			<form method="post">
-				<fieldset>
-			    <legend>CHANGE PASSWORD</legend>
-			    <table>
-			    	<tr>
-			    		<td>Current Password </td>
-			    		<td>:</td>
-			    		<td><input type="password" name="cpassword" id="cpassword" onkeyup="checkCurrentPassword()" onblur="checkCurrentPassword()" value="<?php echo $cpassword;?>">
-			    			<span id="cpasswordErr"></span><span class="error"><?php echo $cpasswordErr;?></span></td>
-			    	</tr>
-
-			    	<tr>
-			    		<td><span class="success">New Password</span></td>
-			    		<td>:</td>
-			    		<td><input type="password" name="npassword" id="npassword" onkeyup="checkNewPassword()" onblur="checkNewPassword()" value="<?php echo $npassword;?>">
-			    			<span id="npasswordErr"></span><span class="error"><?php echo $npasswordErr;?></span></td>
-			    	</tr>
-
-			    	<tr>
-			    		<td><span class="error">Retype New Password</span></td>
-			    		<td>:</td>
-			    		<td><input type="password" name="rnpassword" id="rnpassword" onkeyup="checkRetypeNewPassword()" onblur="checkRetypeNewPassword()" value="<?php echo $rnpassword;?>">
-			    			<span id="rnpasswordErr"></span><span class="error"><?php echo $rnpasswordErr;?></span></td>
-			    	</tr>
-
-			    	<tr>
-			    		<td><span class="error"><?php echo $error;?></span><span class="success"><?php echo $success;?></span></td>
-			    	</tr>
-
-					<tr>
-						<td><input type="submit" name="submit" value="Submit"></td>
-					</tr>
-			    </table>
-			    </fieldset>
+				<h1>Change password</h1>
+				<div class="inset">
+					<p>
+						<label for="cpassword">CURRENT PASSWORD</label>
+		    			<input type="password" name="cpassword" id="cpassword" onkeyup="checkCurrentPassword()" onblur="checkCurrentPassword()" value="<?php echo $cpassword;?>">
+		    		</p>
+		    		<span id="cpasswordErr"></span><span class="error"><?php echo $cpasswordErr;?></span></td>
+		    		
+		    		<p>
+						<label for="npassword">NEW PASSWORD</label>
+		    			<input type="password" name="npassword" id="npassword" onkeyup="checkNewPassword()" onblur="checkNewPassword()" value="<?php echo $npassword;?>">
+		    		</p>
+		    		<span id="npasswordErr"></span><span class="error"><?php echo $npasswordErr;?></span></td>
+		    		
+		    		<p>
+						<label for="rnpassword">RETYPE NEW PASSWORD</label>
+		    			<input type="password" name="rnpassword" id="rnpassword" onkeyup="checkRetypeNewPassword()" onblur="checkRetypeNewPassword()" value="<?php echo $rnpassword;?>">
+		    		</p>
+		    		<span id="rnpasswordErr"></span><span class="error"><?php echo $rnpasswordErr;?></span></td>
+					
+					<span class="error"><?php echo $error;?></span><span class="success"><?php echo $success;?></span></td>
+				</div>
+				<p class="p-container">
+					<input type="submit" name="submit" value="Submit"></td>
+				</p>
 			</form>
 		</div>
 	</div>

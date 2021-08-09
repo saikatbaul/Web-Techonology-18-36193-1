@@ -68,7 +68,7 @@ function addStoreOfficer($data)
             ':gender' => $data['gender'],
             ':phoneNumber' => $data['phoneNumber'],
             ':dob' => $data['dob'],
-            ':image' => $data['image']
+            ':image' => null
         ]);
     }
     catch(PDOException $e)

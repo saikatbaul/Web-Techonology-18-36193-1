@@ -1,8 +1,6 @@
 <?php
-
 $nameErr = $emailErr = $unameErr = $dobErr = $genderErr = $phoneNumberErr = $passwordErr = $cpasswordErr = "";
 $name = $email = $uname = $dob = $gender = $phoneNumber = $password = $pass = $cpassword = $error ="";
-
 if (isset($_POST['submit'])) 
 {
 	if (empty($_POST["name"])) 
@@ -29,7 +27,6 @@ if (isset($_POST['submit']))
 			$name = "";
 		}
 	}
-
 	if (empty($_POST["email"])) 
 	{
 		$emailErr = "Email is required";
@@ -64,7 +61,6 @@ if (isset($_POST['submit']))
 			}
 		}
 	}
-
 	if (empty($_POST["uname"])) 
 	{
 		$unameErr = "Username is required";
@@ -107,7 +103,6 @@ if (isset($_POST['submit']))
 			$uname = "";
 		}
 	}
-
 	if (empty($_POST["password"])) 
 	{
 		$passwordErr = "Password is required";
@@ -125,7 +120,6 @@ if (isset($_POST['submit']))
 			$password = $pass = "";
 		}
 	}
-
 	if (empty($_POST["cpassword"])) 
 	{
 		$cpasswordErr = "Confirm password is required";
@@ -143,7 +137,6 @@ if (isset($_POST['submit']))
 			$cpassword = "";
 		}
 	}
-
 	if (empty($_POST["gender"])) 
 	{
 		$genderErr = "Gender is required";
@@ -152,7 +145,6 @@ if (isset($_POST['submit']))
 	{
 		$gender = $_POST["gender"];
 	}
-
 	if (empty($_POST["phoneNumber"])) 
 	{
 		$phoneNumberErr = "Phone number is required";
@@ -177,7 +169,6 @@ if (isset($_POST['submit']))
 			$phoneNumber = "";
 		}
 	}
-
 	if (empty($_POST["dob"])) 
 	{
 		$dobErr = "Date of birth is required";
@@ -186,7 +177,6 @@ if (isset($_POST['submit']))
 	{
 		$dob = $_POST["dob"];
 	}
-
 	if(empty($name) || empty($email) || empty($uname) || empty($password) || empty($cpassword) || empty($gender) || empty($phoneNumber) || empty($dob))
 	{
 		$error = "Input Error!!"; 
@@ -194,7 +184,6 @@ if (isset($_POST['submit']))
     else  
 	{  
 		require_once '../Model/modelStoreOfficer.php';
-
 		$data['name'] = $name;
 		$data['email'] = $email;
 		$data['uname'] = $uname;
@@ -202,11 +191,11 @@ if (isset($_POST['submit']))
 		$data['gender'] = $gender;
 		$data['phoneNumber'] = $phoneNumber;
 		$data['dob'] = $dob;
-
-
 		if (addStoreOfficer($data)) 
 		{
-			header('Location: ../View/Login.php');
+?>
+			<script>window.location.href= '../View/Login.php'</script>
+<?php
 		} 
 	}
 }
