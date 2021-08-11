@@ -148,4 +148,21 @@ function showAllCustomer()
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $rows;
 }
+
+
+function showAllTransactions()
+{
+    $conn = db_conn();
+    $selectQuery = 'SELECT * FROM `transactions` ORDER BY `orderId` ASC';
+    try
+    {
+        $stmt = $conn->query($selectQuery);
+    }
+    catch(PDOException $e)
+    {
+        echo $e->getMessage();
+    }
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $rows;
+}
 ?>
